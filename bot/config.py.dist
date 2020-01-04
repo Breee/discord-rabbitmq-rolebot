@@ -1,3 +1,4 @@
+import os
 # Directory where the log file of the bot shall be stored
 LOG_PATH = '.'
 
@@ -5,19 +6,19 @@ LOG_PATH = '.'
 Discord Section.
 """
 # The Token of your botuser.
-BOT_TOKEN = 'aasdasdasdasdasdasds'
+BOT_TOKEN = os.getenv('BOT_TOKEN', 'aasdasdasdasdasdasds')
 # Discord Status
-PLAYING = 'PogoBackendBot'
+PLAYING = os.getenv('BOT_PLAYING', 'PogoBackendBot')
 # Command prefix
-PREFIX = '!'
+PREFIX = os.getenv('BOT_PREFIX', '!')
 
 # Logging Channel
-LOGGING_CHANNEL_ID = 2323432432432
+LOGGING_CHANNEL_ID = os.getenv('LOGGING_CHANNEL_ID', 0)
 
 # RabbitMQ
-RABBITMQ_HOST = 'localhost'
-RABBITMQ_PORT = 5672
-RABBITMQ_USERNAME = 'rabbit'
-RABBITMQ_PASSWORD = 'rabbit'
-RABBITMQ_FEEDBACK_QUEUE = 'pogobackend_feedback_queue'
-RABBITMQ_CONSUMER_QUEUE = 'pogobackend_consumer_queue'
+RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
+RABBITMQ_PORT = os.getenv('RABBITMQ_PORT', '5672')
+RABBITMQ_USERNAME = os.getenv('RABBITMQ_USERNAME', 'rabbit')
+RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD', 'rabbit')
+RABBITMQ_FEEDBACK_QUEUE =  os.getenv('RABBITMQ_FEEDBACK_QUEUE', 'pogobackend_feedback_queue')
+RABBITMQ_CONSUMER_QUEUE =  os.getenv('RABBITMQ_CONSUMER_QUEUE', 'pogobackend_consumer_queue')
