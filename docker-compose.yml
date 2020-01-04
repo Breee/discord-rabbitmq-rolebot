@@ -1,0 +1,22 @@
+version: '2.4'
+services:
+  bot:
+    container_name: pokemon_rolebot
+    build:
+      context: ./bot
+    volumes:
+      - ./bot/config.py:/usr/src/app/config.py
+    restart: always
+    networks:
+      - default
+
+  rabbitmq:
+    container_name: pokemon_rabbitmq
+    image: rabbitmq:3
+    networks:
+      - default
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbit
+      - RABBITMQ_DEFAULT_PASS=rabbit
+    volumes:
+      - ./volumes/rabbitmq:/var/lib/rabbitmq

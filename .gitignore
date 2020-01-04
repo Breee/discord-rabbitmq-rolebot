@@ -1,0 +1,16 @@
+
+volumes/
+
+venv/
+
+.idea/
+
+bot/__pycache__/
+
+bot/config.py
+
+bot/utility/__pycache__/
+
+bot/rabbitmq_management/__pycache__/
+
+bot/cogs/__pycache__/

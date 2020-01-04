@@ -1,0 +1,23 @@
+# Directory where the log file of the bot shall be stored
+LOG_PATH = '.'
+
+"""
+Discord Section.
+"""
+# The Token of your botuser.
+BOT_TOKEN = 'aasdasdasdasdasdasds'
+# Discord Status
+PLAYING = 'PogoBackendBot'
+# Command prefix
+PREFIX = '!'
+
+# Logging Channel
+LOGGING_CHANNEL_ID = 2323432432432
+
+# RabbitMQ
+RABBITMQ_HOST = 'localhost'
+RABBITMQ_PORT = 5672
+RABBITMQ_USERNAME = 'rabbit'
+RABBITMQ_PASSWORD = 'rabbit'
+RABBITMQ_FEEDBACK_QUEUE = 'pogobackend_feedback_queue'
+RABBITMQ_CONSUMER_QUEUE = 'pogobackend_consumer_queue'
