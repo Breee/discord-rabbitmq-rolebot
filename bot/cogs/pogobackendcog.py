@@ -4,6 +4,7 @@ import config as config
 from rabbitmq_management.rabbitmq_manager import RabbitMQManager, RoleAssignment
 from typing import List
 from discord import Guild, Role
+from utility.globals import LOGGER
 
 
 class PogoBackendCog(commands.Cog, name="pogobackend"):
@@ -24,6 +25,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
             await guild.fetch_roles()
 
     async def process_messages(self):
+        LOGGER.info('Processing messages')
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(config.LOGGING_CHANNEL_ID)
         while not self.bot.is_closed():
@@ -32,15 +34,18 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
             for message in messages:
                 guild: Guild = self.bot.get_guild(message.guild_id)
                 role: Role = guild.get_role(message.role_id)
+                LOGGER.info(f'guild: {guild} role: {role}')
                 for uid in message.give_role:
                     member = guild.get_member(uid)
-                    if member:
+                    LOGGER.info(f'member: {member}')
+                    if member is not None:
                         await member.add_roles(role)
                         logging_messages.append(f'Gave {member.name} role {role}')
 
                 for uid in message.take_role:
                     member = guild.get_member(uid)
-                    if member:
+                    LOGGER.info(f'member: {member}')
+                    if member is not None:
                         await member.remove_roles(role)
                         logging_messages.append(f'Took {member.name} role {role}')
             logs = "\n".join(logging_messages)
