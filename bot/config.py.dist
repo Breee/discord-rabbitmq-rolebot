@@ -1,7 +1,4 @@
 import os
-# Directory where the log file of the bot shall be stored
-LOG_PATH = '.'
-
 """
 Discord Section.
 """
