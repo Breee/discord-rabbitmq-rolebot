@@ -34,13 +34,15 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                 role: Role = guild.get_role(message.role_id)
                 for uid in message.give_role:
                     member = guild.get_member(uid)
-                    await member.add_roles(role)
-                    logging_messages.append(f'Gave {member.name} role {role}')
+                    if member:
+                        await member.add_roles(role)
+                        logging_messages.append(f'Gave {member.name} role {role}')
 
                 for uid in message.take_role:
                     member = guild.get_member(uid)
-                    await member.remove_roles(role)
-                    logging_messages.append(f'Took {member.name} role {role}')
+                    if member:
+                        await member.remove_roles(role)
+                        logging_messages.append(f'Took {member.name} role {role}')
             logs = "\n".join(logging_messages)
             if logs:
                 await channel.send(f'```\n{logs}\n```')
