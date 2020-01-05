@@ -2,7 +2,7 @@ FROM python:3.7-alpine
 
 # Working directory for the application
 WORKDIR /usr/src/app
-COPY . /usr/src/app
+COPY bot /usr/src/app
 
 RUN apk --no-cache update && apk --no-cache upgrade && apk --no-cache add --virtual buildpack gcc musl-dev build-base
 RUN apk --no-cache update && apk add git
