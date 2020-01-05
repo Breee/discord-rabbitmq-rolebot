@@ -41,6 +41,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     if member is not None:
                         await member.add_roles(role)
                         logging_messages.append(f'Gave {member.name} role {role}')
+                        LOGGER.info(f'Gave {member.name} role {role}')
 
                 for uid in message.take_role:
                     member = guild.get_member(uid)
@@ -48,6 +49,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     if member is not None:
                         await member.remove_roles(role)
                         logging_messages.append(f'Took {member.name} role {role}')
+                        LOGGER.info(f'Took {member.name} role {role}')
             logs = "\n".join(logging_messages)
             if logs:
                 await channel.send(f'```\n{logs}\n```')
