@@ -1,0 +1,19 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     - run:
+         name: Store Version and Image name
+         command: |
+           echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
+           echo 'export IMAGE_NAME=discord-rabbitmq-rolebot' >> $BASH_ENV
+     # with credentials stored in the UI
+     - run:
+         command: |
+           docker build -t breedocker/$IMAGE_NAME:$TAG .
+           docker build -t breedocker/$IMAGE_NAME:latest .
+           docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
+           docker push breedocker/$IMAGE_NAME:$TAG
+           docker push breedocker/$IMAGE_NAME:latest
