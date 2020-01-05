@@ -10,7 +10,7 @@ PLAYING = os.getenv('BOT_PLAYING', 'PogoBackendBot')
 PREFIX = os.getenv('BOT_PREFIX', '!')
 
 # Logging Channel
-LOGGING_CHANNEL_ID = os.getenv('LOGGING_CHANNEL_ID', 0)
+LOGGING_CHANNEL_ID = int(os.getenv('LOGGING_CHANNEL_ID', 0))
 
 # RabbitMQ
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
