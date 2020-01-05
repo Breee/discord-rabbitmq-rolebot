@@ -25,19 +25,17 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
             await guild.fetch_roles()
 
     async def process_messages(self):
-        LOGGER.info('Processing messages')
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(config.LOGGING_CHANNEL_ID)
         while not self.bot.is_closed():
+            LOGGER.info('Processing messages')
             messages: List[RoleAssignment] = self.rabbitmq_manager.fetch_messages()
             logging_messages = []
             for message in messages:
                 guild: Guild = self.bot.get_guild(message.guild_id)
                 role: Role = guild.get_role(message.role_id)
-                LOGGER.info(f'guild: {guild} role: {role}')
                 for uid in message.give_role:
                     member = guild.get_member(uid)
-                    LOGGER.info(f'member: {member}')
                     if member is not None:
                         await member.add_roles(role)
                         logging_messages.append(f'Gave {member.name} role {role}')
@@ -45,7 +43,6 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
 
                 for uid in message.take_role:
                     member = guild.get_member(uid)
-                    LOGGER.info(f'member: {member}')
                     if member is not None:
                         await member.remove_roles(role)
                         logging_messages.append(f'Took {member.name} role {role}')
