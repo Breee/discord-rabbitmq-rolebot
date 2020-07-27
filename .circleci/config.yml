@@ -17,3 +17,24 @@ jobs:
            docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
            docker push breedocker/$IMAGE_NAME:$TAG
            docker push breedocker/$IMAGE_NAME:latest
+ build-pr:
+  machine: true
+  steps:
+    - checkout
+    - run:
+        command: |
+          docker build --no-cache .
+   
+         
+workflows:
+  version: 2
+  main:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only: master
+    - build-pr:
+        filters:
+          branches:
+            ignore: master
