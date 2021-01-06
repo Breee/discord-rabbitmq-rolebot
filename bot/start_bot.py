@@ -27,5 +27,6 @@ from bot_core import BotBase
 
 if __name__ == "__main__":
     LOGGER.info("Starting Bot.")
-    bot = BotBase(description="")
+    intents = discord.Intents(guilds=True, messages=True, members=True)
+    bot = BotBase(description="", intents=intents)
     bot.run()
