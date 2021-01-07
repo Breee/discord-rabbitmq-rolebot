@@ -38,7 +38,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     member = guild.get_member(uid)
                     if member is not None:
                         await member.add_roles(role)
-                        logging_messages.append(f'Gave {member.name} role {role}')
+                        logging_messages.append(f'Gave {member.name} role {role}\n')
                         LOGGER.info(f'Gave {member.name} role {role}')
 
                 for uid in message.take_role:
@@ -47,7 +47,13 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                         await member.remove_roles(role)
                         logging_messages.append(f'Took {member.name} role {role}')
                         LOGGER.info(f'Took {member.name} role {role}')
-            logs = "\n".join(logging_messages)
+            logs = ""
+            for msg in logging_messages:
+                if len(logs + msg) < 2000:
+                    logs += msg
+                else:
+                    await channel.send(f'```\n{logs}\n```')
+                    logs = ""
             if logs:
                 await channel.send(f'```\n{logs}\n```')
             await asyncio.sleep(60)
