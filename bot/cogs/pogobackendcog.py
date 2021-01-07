@@ -46,7 +46,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     if member is not None:
                         await member.remove_roles(role)
                         logging_messages.append(f'Took {member.name} role {role}')
-                        LOGGER.info(f'Took {member.name} role {role}')
+                        LOGGER.info(f'Took {member.name} role {role}\n')
             logs = ""
             for msg in logging_messages:
                 if len(logs + msg) < 2000:
