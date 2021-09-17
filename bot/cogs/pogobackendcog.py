@@ -18,7 +18,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
         self.rabbitmq_manager.start_consumer()
 
         # create the background task and run it in the background
-        self.bg_task = self.bot.loop.create_task(self.process_messages())
+        #self.bg_task = self.bot.loop.create_task(self.process_messages())
 
     async def on_ready(self):
         for guild in self.bot.guilds:
