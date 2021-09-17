@@ -24,7 +24,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
         for guild in self.bot.guilds:
             await guild.fetch_roles()
             
-    @tasks.loop(seconds=60)
+    @tasks.loop(minutes=1.0)
     async def process_messages(self):
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(config.LOGGING_CHANNEL_ID)
@@ -57,4 +57,4 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     logs = ""
             if logs:
                 await channel.send(f'```\n{logs}\n```')
-        #await asyncio.sleep(60)
+        await asyncio.sleep(60)
