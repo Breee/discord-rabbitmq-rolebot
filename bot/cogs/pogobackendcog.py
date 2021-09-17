@@ -1,4 +1,4 @@
-from discord.ext import commands
+from discord.ext import tasks, commands
 import asyncio
 import config as config
 from rabbitmq_management.rabbitmq_manager import RabbitMQManager, RoleAssignment
@@ -23,7 +23,8 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
     async def on_ready(self):
         for guild in self.bot.guilds:
             await guild.fetch_roles()
-
+            
+    @tasks.loop(seconds=30)
     async def process_messages(self):
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(config.LOGGING_CHANNEL_ID)
@@ -56,4 +57,3 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     logs = ""
             if logs:
                 await channel.send(f'```\n{logs}\n```')
-            await asyncio.sleep(60)
