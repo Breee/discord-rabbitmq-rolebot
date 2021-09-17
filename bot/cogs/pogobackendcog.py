@@ -19,12 +19,13 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
 
         # create the background task and run it in the background
         #self.bg_task = self.bot.loop.create_task(self.process_messages())
+        self.process_messages.start()
 
     async def on_ready(self):
         for guild in self.bot.guilds:
             await guild.fetch_roles()
             
-    @tasks.loop(seconds=60.0)
+    @tasks.loop(seconds=30.0)
     async def process_messages(self):
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(config.LOGGING_CHANNEL_ID)
