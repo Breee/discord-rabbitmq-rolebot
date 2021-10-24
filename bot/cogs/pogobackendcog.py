@@ -47,7 +47,7 @@ class PogoBackendCog(commands.Cog, name="pogobackend"):
                     member = guild.get_member(uid)
                     if member is not None:
                         await member.remove_roles(role)
-                        logging_messages.append(f'-- {member.name} {role}')
+                        logging_messages.append(f'-- {member.name} {role}\n')
                         LOGGER.info(f'-- {member.name} {role}\n')
             logs = ""
             for msg in logging_messages:
